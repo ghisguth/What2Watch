@@ -1,3 +1,5 @@
+#!/usr/bin/env sbcl --script
+
 (defun load-quicklisp()
   (let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
 					 (user-homedir-pathname))))
