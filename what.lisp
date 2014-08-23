@@ -51,12 +51,6 @@
 	  (name (extract-name link)))
     (list name (or progress "???"))))
 
-;(defun extract-title(url content)
-;  (case (find-symbol (string-upcase (puri:uri-host (puri:parse-uri url))))
-;    (rutracker.org (extract-title-rutracker content))
-;    (tr.anidub.com (extract-title-anidub content))
-;    (t '("unknown" "???"))))
-
 (defun extract-title(url content)
   (let ((hostname (puri:uri-host (puri:parse-uri url))))
     (cond 
