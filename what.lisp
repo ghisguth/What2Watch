@@ -29,29 +29,25 @@
 (defun extract-progress(link)
   (cl-ppcre:scan-to-strings "\\[[0-9\-]+ из [0-9]+\\]" link))
 
-(defun extract-title-block-rutracker(content)
-  (cl-ppcre:scan-to-strings "<h1 class=\\\"maintitle\\\"><a[^>]+>.*" content))
+(defun extract-title-block(patterns content)
+  (cl-ppcre:scan-to-strings (getf patterns :title) content))
 
-(defun extract-link-block-rutracker(title)
-  (cl-ppcre:scan-to-strings "<a[^>]+>(([^<]*))" title))
+(defun extract-link-block(patterns title)
+  (cl-ppcre:scan-to-strings (getf patterns :link) title))
+
+(defun extract-title-patterns(patterns content)
+  (let* ((link (extract-link-block patterns (extract-title-block patterns content)))
+	 (progress (extract-progress link))
+	 (name (extract-name link)))
+    (list name (or progress "???"))))
 
 (defun extract-title-rutracker(content)
-  (let* ((link (extract-link-block-rutracker (extract-title-block-rutracker content)))
-	  (progress (extract-progress link))
-	  (name (extract-name link)))
-    (list name progress)))
-
-(defun extract-title-block-anidub(content)
-  (cl-ppcre:scan-to-strings "<span id=\\\"news-title\\\">.*" content))
-
-(defun extract-link-block-anidub(title)
-  (cl-ppcre:scan-to-strings ">(([^<]*))" title))
+  (let ((patterns '(:title "<h1 class=\\\"maintitle\\\"><a[^>]+>.*" :link "<a[^>]+>(([^<]*))")))
+    (extract-title-patterns patterns content)))
 
 (defun extract-title-anidub(content)
-  (let* ((link (extract-link-block-anidub (extract-title-block-anidub content)))
-	  (progress (extract-progress link))
-	  (name (extract-name link)))
-    (list name (or progress "???"))))
+  (let ((patterns '(:title "<span id=\\\"news-title\\\">.*" :link ">(([^<]*))")))
+    (extract-title-patterns patterns content)))
 
 (defun extract-title(url content)
   (let ((hostname (puri:uri-host (puri:parse-uri url))))
