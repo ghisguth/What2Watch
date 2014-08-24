@@ -1,15 +1,4 @@
-#!/usr/bin/env sbcl --script
-
-(defun load-quicklisp()
-  (let ((quicklisp-init (merge-pathnames ".quicklisp/setup.lisp"
-					 (user-homedir-pathname))))
-    (when (probe-file quicklisp-init)
-      (load quicklisp-init))))
-
-(load-quicklisp)
-(require :drakma)
-(require :cl-ppcre)
-(require :puri)
+(in-package :what-to-watch)
 
 (defun get-watch-url-list()
   '("http://rutracker.org/forum/viewtopic.php?t=4786394"
@@ -64,11 +53,3 @@
 
 (defun process-urls(urls)
    (dolist (url urls) (process-url url))) 
-
-;; entry point
-(defun main()
-  (format t "what?!~%")
-  (let ((urls (get-watch-url-list)))
-	(process-urls urls)))
-
-(main)
