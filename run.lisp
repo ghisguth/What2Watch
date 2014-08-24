@@ -1,5 +1,5 @@
 #!/usr/bin/env sbcl --noinform --script
 (load "~/.sbclrc")
-(require :what-to-watch)
+(ql:quickload :what-to-watch)
 (what-to-watch:main nil)
 
