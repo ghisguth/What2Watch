@@ -1,19 +1,23 @@
 (in-package :what-to-watch)
 
+;"http://rutracker.org/forum/viewtopic.php?t=4786394"
+;   "http://rutracker.org/forum/viewtopic.php?t=4777752"
+;   "http://rutracker.org/forum/viewtopic.php?t=4781143"
+
 (defun get-watch-url-list()
-  '("http://rutracker.org/forum/viewtopic.php?t=4786394"
-   "http://rutracker.org/forum/viewtopic.php?t=4777752"
-   "http://rutracker.org/forum/viewtopic.php?t=4781143"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9088-mastera-mecha-onlayn-2-sword-art-online-ii-01-iz-24.html"
+  '(   "http://tr.anidub.com/anime_tv/anime_ongoing/9088-mastera-mecha-onlayn-2-sword-art-online-ii-01-iz-24.html"
    "http://tr.anidub.com/anime_tv/anime_ongoing/9070-ubiyca-akame-akame-ga-kill-prevyu.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9113-rezonans-uzhasa-zankyou-no-terror-01-11.html"))
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9113-rezonans-uzhasa-zankyou-no-terror-01-11.html"
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9084-tokiyskiy-gul-tokyo-ghoul-01-iz-12.html"
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9285-perepute-anzh-cross-ange-01-iz-25.html"
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9308-psihopasport-2-psycho-pass-2-01-iz-11.html"))
 
 (defun extract-name(link)
   (let* ((start-pos (position #\> link))
-	 (end-pos (position #\[ link)))
+   (end-pos (position #\[ link)))
     (if (or (eql start-pos nil) (eql end-pos nil))
-	"unknown"
-	(subseq link (+ start-pos 1) (- end-pos 1)))))
+  "unknown"
+  (subseq link (+ start-pos 1) (- end-pos 1)))))
 
 (defun extract-progress(link)
   (cl-ppcre:scan-to-strings "\\[[0-9\-]+ из [0-9]+\\]" link))
@@ -26,8 +30,8 @@
 
 (defun extract-title-patterns(patterns content)
   (let* ((link (extract-link-block patterns (extract-title-block patterns content)))
-	 (progress (extract-progress link))
-	 (name (extract-name link)))
+   (progress (extract-progress link))
+   (name (extract-name link)))
     (list name (or progress "???"))))
 
 (defun extract-title-rutracker(content)
