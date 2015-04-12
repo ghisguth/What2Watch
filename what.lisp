@@ -20,7 +20,7 @@
   (subseq link (+ start-pos 1) (- end-pos 1)))))
 
 (defun extract-progress(link)
-  (cl-ppcre:scan-to-strings "\\[[0-9\-]+ из [0-9]+\\]" link))
+  (cl-ppcre:scan-to-strings "\\[[0-9\-]+ из [0-9]+\\+?\\]" link))
 
 (defun extract-title-block(patterns content)
   (cl-ppcre:scan-to-strings (getf patterns :title) content))
