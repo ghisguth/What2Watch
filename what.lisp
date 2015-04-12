@@ -5,12 +5,12 @@
 ;   "http://rutracker.org/forum/viewtopic.php?t=4781143"
 
 (defun get-watch-url-list()
-  '(   "http://tr.anidub.com/anime_tv/anime_ongoing/9088-mastera-mecha-onlayn-2-sword-art-online-ii-01-iz-24.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9070-ubiyca-akame-akame-ga-kill-prevyu.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9113-rezonans-uzhasa-zankyou-no-terror-01-11.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9084-tokiyskiy-gul-tokyo-ghoul-01-iz-12.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9285-perepute-anzh-cross-ange-01-iz-25.html"
-   "http://tr.anidub.com/anime_tv/anime_ongoing/9308-psihopasport-2-psycho-pass-2-01-iz-11.html"))
+  '(
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9436-v-podzemele-ya-poydu-tam-krasavicu-naydu-danmachi-01-iz-12.html"
+   "http://tr.anidub.com/anime_ova/8856-vtorzhenie-titanov-shingeki-no-kyojin-ova-1-iz-2.html"
+   "http://tr.anidub.com/anime_tv/anime_ongoing/9306-anime-ot-a-do-ya-shirobako-01-iz-hh.html"
+   "http://rutracker.org/forum/viewtopic.php?t=4844855"
+   ))
 
 (defun extract-name(link)
   (let* ((start-pos (position #\> link))
