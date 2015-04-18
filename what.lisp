@@ -1,9 +1,5 @@
 (in-package :what-to-watch)
 
-;"http://rutracker.org/forum/viewtopic.php?t=4786394"
-;   "http://rutracker.org/forum/viewtopic.php?t=4777752"
-;   "http://rutracker.org/forum/viewtopic.php?t=4781143"
-
 (defun get-watch-url-list()
   '(
    "http://tr.anidub.com/anime_tv/anime_ongoing/9436-v-podzemele-ya-poydu-tam-krasavicu-naydu-danmachi-01-iz-12.html"
@@ -51,9 +47,12 @@
 
 (defun process-url(url)
   (format t "~a~%" url)
-  (let ((content (drakma:http-request url :external-format-in :utf-8)))
-    (let ((title (extract-title url content)))
-      (format t "~a [92m~a[0m~%" (first title) (second title)))))
+  (handler-case
+    (let ((content (drakma:http-request url :external-format-in :utf-8)))
+      (let ((title (extract-title url content)))
+         (format t "~a [92m~a[0m~%" (first title) (second title))))
+    (error (ee) 
+      (format t "[31mError: ~a[0m~%" ee))))
 
 (defun process-urls(urls)
    (dolist (url urls) (process-url url))) 
